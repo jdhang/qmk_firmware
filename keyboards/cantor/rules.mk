@@ -1,5 +1,6 @@
 SRC += features/layer_lock.c
 
+AUTO_SHIFT_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
 SPLIT_KEYBOARD = yes
