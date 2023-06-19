@@ -7,8 +7,8 @@
 #define SERIAL_USART_TX_PIN B6     // USART TX pin
 #define SERIAL_USART_RX_PIN B7     // USART RX pin
 
-
-#define TAPPING_TERM 175
+#define QUICK_TAP_TERM 175
+#define TAPPING_TERM 200 
 
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 
