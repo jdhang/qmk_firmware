@@ -7,6 +7,11 @@
 #define SERIAL_USART_TX_PIN B6     // USART TX pin
 #define SERIAL_USART_RX_PIN B7     // USART RX pin
 
+
+#define TAPPING_TERM 175
+
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
