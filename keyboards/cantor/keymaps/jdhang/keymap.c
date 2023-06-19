@@ -15,7 +15,6 @@ enum custom_keycodes {
   M_ARROW_REQL, /* => */
 
   /* Tap dance defines */
-  TD_CTL_GUI = 0,
   TD_EQL_REQL = 0,
   TD_GUI_CTL = 0,
 };
@@ -93,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
         KC_NO, KC_NO,  KC_LEFT, KC_DOWN,    KC_UP,     KC_RIGHT,                                  G(KC_LALT), KC_PGDN,      KC_PGUP,   KC_NO,      KC_NO,  TO(_COLE),
       //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
-                                            QK_REP,    KC_DEL,   TD(TD_CTL_GUI),           KC_NO, KC_NO,      KC_NO
+                                            QK_REP,    KC_DEL,   KC_LCTL,           KC_NO, KC_NO,      KC_NO
       //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
     ),
      /*
@@ -175,7 +174,6 @@ void dance_eql_arrow(tap_dance_state_t *state, void *user_data) {
 
 // Tap dance definitions
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
     // tap: =, double-tap: =>
     [TD_EQL_REQL] = ACTION_TAP_DANCE_FN(dance_eql_arrow),
     [TD_GUI_CTL] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
