@@ -18,6 +18,11 @@ enum custom_keycodes {
     M_EQ_GT, /* => */
     M_EQ3X,  /* === */
     M_UPDIR, /* ../ */
+    M_LPRN_LT,
+    M_RPRN_GT,
+    M_MINS_UNDS,
+    M_BSLS_SLSH,
+    M_SLSH_BSLS,
 
     /* Tap dance defines */
     TD_EQL_REQL = 0,
@@ -43,11 +48,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_BASE] = LAYOUT_split_3x6_3(
         //-------------------------------------------------------------------------------      ----------------------------------------------------------------------------------
-        KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,
+        KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,
         //-------------------------------------------------------------------------------      ---------------------------------------------------------------------------------
-        KC_NO, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_NO,
+        KC_NO, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_QUOT, KC_NO,
         //-------------------------------------------------------------------------------      ---------------------------------------------------------------------------------
-        KC_NO, LSFT_T(KC_Z), KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, LSFT_T(KC_SLSH), KC_NO,
+        KC_ESC, LSFT_T(KC_Z), KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, LSFT_T(KC_SLSH), KC_NO,
         //-------------------------------------------------------------------------------      ---------------------------------------------------------------------------------
         OSM(MOD_LGUI), LT(_NUM, KC_BSPC), LT(_SYM, KC_SPC), LT(_NAV, KC_ENT), LSFT_T(KC_ESC), OSM(MOD_LCTL)
         //-------------------------------------------------------------------------------      ---------------------------------------------------------------------------------
@@ -79,25 +84,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     /*
      * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-     * │   │   │ @ │ # │ ` │ % │       │ & │ [ │ ] │ + │ - │   │
+     * │   │   │ @ │ # │ ` │ % │       │ & │ [ │ ] │ * │ - │   │
      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-     * │   │ ! │ ? │ ^ │ = │   │       │ | │ ( │ ) │ ; │ ' │   │
+     * │   │ ! │ @ │ ^ │ = │=> │       │ | │ ( │ ) │ : │ ' │   │
      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-     * │   │   │   │ $ │ ~ │ - │       │ * │ { │ } │ ` │ \ │   │
+     * │   │ ? │   │ $ │ ~ │ _ │       │ - │ { │ } │ * │ \ │   │
      * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
      *               ┌───┐                   ┌───┐
      *               │   ├───┐           ┌───┤Ctl│
-     *               └───┤   ├───┐   ┌───┤Gui├───┘
-     *                   └───┤   │   │Sft├───┘
+     *               └───┤Alt├───┐   ┌───┤Sft├───┘
+     *                   └───┤   │   │Gui├───┘
      *                       └───┘   └───┘
      */
     [_SYM] = LAYOUT_split_3x6_3(
         //-------------------------------------------------------------------        ---------------------------------------------------------------------------------
-        KC_NO, KC_NO, KC_AT, KC_HASH, KC_GRV, KC_PERC, KC_AMPR, KC_LBRC, KC_RBRC, KC_ASTR, KC_DQT, KC_NO,
+        KC_NO, KC_GRV, KC_LBRC, KC_LCBR, M_LPRN_LT, KC_PERC, KC_AMPR, M_RPRN_GT, KC_RCBR, KC_RBRC, KC_NO, KC_NO,
         //-------------------------------------------------------------------        ---------------------------------------------------------------------------------
-        KC_NO, KC_EXLM, KC_QUES, KC_CIRC, KC_EQL, M_EQ_GT, KC_PIPE, KC_LPRN, KC_RPRN, KC_COLN, KC_QUOT, KC_NO,
+        KC_NO, KC_EXLM, KC_QUES, KC_CIRC, KC_EQL, KC_SCLN, KC_PIPE, KC_COLN, KC_NO, KC_NO, KC_SCLN, KC_NO,
         //-------------------------------------------------------------------        ---------------------------------------------------------------------------------
-        KC_NO, KC_NO, KC_NO, KC_DLR, KC_TILD, KC_UNDS, KC_MINS, KC_LCBR, KC_RCBR, KC_NO, KC_BSLS, KC_NO,
+        KC_NO, KC_NO, KC_AT, KC_DLR, M_EQ_GT, KC_UNDS, M_MINS_UNDS, KC_ASTR, M_SLSH_BSLS, KC_NO, KC_NO, KC_NO,
         //--------------------------------------------------------------------       ---------------------------------------------------------------------------------
         KC_NO, KC_LALT, KC_NO, KC_LGUI, KC_LSFT, KC_LCTL
         //-------------------------------------------------------------------        ---------------------------------------------------------------------------------
@@ -106,25 +111,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
      * │   │Tab│   │CHm│CEd│   │       │G[ │G] │CST│CT │   │   │
      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-     * │   │Ctl│Alt│Gui│Sft│Esc│       │ L │ D │ U │ R │   │   │
+     * │   │Ctl│Alt│Gui│Sft│Tab│       │ L │ D │ U │ R │   │   │
      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
      * │   │   │Hom│End│PDn│PUp│       │   │   │   │   │   │   │
      * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
      *               ┌───┐                   ┌───┐
-     *               │   ├───┐           ┌───┤   │
+     *               │Ctl├───┐           ┌───┤   │
      *               └───┤Del├───┐   ┌───┤   ├───┘
-     *                   └───┤Ctl│   │   ├───┘
+     *                   └───┤Tab│   │   ├───┘
      *                       └───┘   └───┘
      */
     [_NAV] = LAYOUT_split_3x6_3(
         //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
-        KC_NO, KC_TAB, G(KC_LBRC), G(KC_RBRC), C(S(KC_TAB)), C(KC_TAB), KC_CIRC, KC_RCBR, KC_LCBR, KC_DLR, KC_NO, KC_NO,
+        KC_NO, G(KC_LBRC), G(KC_RBRC), C(S(KC_TAB)), C(KC_TAB), KC_NO, KC_UNDS, KC_RCBR, KC_LCBR, KC_DLR, KC_NO, KC_NO,
         //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
-        KC_NO, OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), OSM(MOD_LSFT), KC_ESC, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO, KC_NO,
+        KC_NO, OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), OSM(MOD_LSFT), KC_PERC, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO, KC_NO,
         //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
-        KC_NO, KC_NO, KC_PGDN, KC_PGUP, KC_HOME, KC_END, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_PGDN, KC_PGUP, KC_HOME, KC_END, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
         //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
-        KC_NO, KC_DEL, KC_LCTL, KC_NO, KC_NO, KC_NO
+        KC_LCTL, KC_DEL, MT(MOD_LCTL, KC_TAB), KC_NO, KC_NO, KC_NO
         //------------------------------------------------------------------------         ---------------------------------------------------------------------------------
         ),
     /*
@@ -216,6 +221,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case M_UPDIR:
             if (record->event.pressed) {
                 SEND_STRING("../");
+            }
+            return false;
+
+        case M_LPRN_LT:
+            if (record->event.pressed) {
+                if ((get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT) {
+                    SEND_STRING("<");
+                } else {
+                    SEND_STRING("(");
+                }
+            }
+            return false;
+
+        case M_RPRN_GT:
+            if (record->event.pressed) {
+                if ((get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT) {
+                    SEND_STRING(">");
+                } else {
+                    SEND_STRING(")");
+                }
+            }
+            return false;
+
+        case M_MINS_UNDS:
+            if (record->event.pressed) {
+                if ((get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT) {
+                    SEND_STRING("_");
+                } else {
+                    SEND_STRING("-");
+                }
+            }
+            return false;
+
+        case M_BSLS_SLSH:
+            if (record->event.pressed) {
+                if ((get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT) {
+                    SEND_STRING("/");
+                } else {
+                    SEND_STRING("\\");
+                }
+            }
+            return false;
+
+        case M_SLSH_BSLS:
+            if (record->event.pressed) {
+                if ((get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT) {
+                    SEND_STRING("\\");
+                } else {
+                    SEND_STRING("/");
+                }
             }
             return false;
     }
